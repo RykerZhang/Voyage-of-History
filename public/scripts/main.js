@@ -2,12 +2,16 @@
 var rhit = rhit || {};
 
 rhit.theAuthManager = null;
+rhit.username = null;
+rhit.theDiscussionManager = null;
 
 rhit.COLLECTION_DISCUSSION = "Discussion";
 rhit.KEY_TITLE = "Title";
 rhit.KEY_CONTENT = "Content";
 rhit.KEY_SECTION = "Section";
-rhit.FB_KEY_LAST_TOUCHED = "lastTouched";
+rhit.KEY_LAST_TOUCHED = "lastTouched";
+rhit.KEY_AUTHOR = "author";
+
 
 
 const inputEmail = document.querySelector("#emailAddress");
@@ -27,18 +31,31 @@ rhit.startFirebaseUI = function(){
       ui.start('#firebaseui-auth-container', uiConfig);
 }
 
+function htmlToElement(html){
+	var temp = document.createElement('template');
+	html = html.trim();
+	temp.innerHTML = html;
+	return temp.content.firstChild;
+}
+
 //initialize of each page
 rhit.intialize = function(){
 	const urlParams = new URLSearchParams(window.location.search);
+	//initialize the homepage
 	if(document.querySelector("#HomePage")){
 		const uid = urlParams.get("uid");
+		//make new pagecontroller for home page
+		rhit.theDiscussionManager = new rhit.DiscussionManager(uid)
 		new this.HomePageController();
-
 	}
+	//initialize the warsectionpage
 	if(document.querySelector("#WarsSectionPage")){
+		const uid = urlParams.get("uid");
+		//make new discussionmanager and pagecontroller so that the data will be sent to the backend
+		rhit.theDiscussionManager = new rhit.DiscussionManager(uid)
 		new this.WarsSectionPageController();
-
 	}
+	//initialize the loginpage
 	if(document.querySelector("#LoginPage")){
 		new this.LoginPageController();
 		rhit.startFirebaseUI();
@@ -46,6 +63,7 @@ rhit.intialize = function(){
 	}
 }
 
+//check for the redirects of login
 rhit.checkForRedirects = function(){
 	console.log(rhit.theAuthManager.isSignedIn);
 	if(document.querySelector("#LoginPage")&&rhit.theAuthManager.isSignedIn){
@@ -58,7 +76,7 @@ rhit.checkForRedirects = function(){
 
 //the class for the discussion Card
 rhit.Discussion = class{
-	constructor(id, content, section, title){
+	constructor(id, title, content, section){
 		this.id = id;
 		this.content = content;
 		this.section = section;
@@ -76,11 +94,43 @@ rhit.DiscussionManager = class{
 	}
 
 	add(title, content, section){
-
+		//add parameters to the backend
+		this._ref.add({
+			[rhit.KEY_AUTHOR]:rhit.username,
+			[rhit.KEY_CONTENT]:content,
+			[rhit.KEY_SECTION]:section,
+			[rhit.KEY_TITLE]: title,
+			[rhit.FB_KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
+		})
+		.then(function (docRef){
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch(function(error){
+			console.log("Error adding document: ", error);
+		});
+	  }
+	
+	beginListening(changeListener){
+		// sort the posts in descending time, limit to 2 posts
+		let query = this._ref.orderBy(rhit.KEY_LAST_TOUCHED,"desc").limit(20)
+		if(this._uid){
+			query = query.where(rhit.KEY_AUTHOR,"==",this._uid);
+		}
+		this._unsubscribe = query.onSnapshot((querySnapshot) => {
+			console.log("Post Update");
+			this._documentSnapshots = querySnapshot.docs;
+			changeListener();
+    	});
 	}
-	beginListening(changeListener){}
-	stopListening() {}
-	getDiscussionAt(index) {    }
+	stopListening() {
+		this._unsubscribe();
+	}
+	//get discussion at certain index in the firestore
+	getDiscussionAt(index) { 
+		const docSnapshot = this._documentSnapshots[index];
+		const theDiscussion = new rhit.Discussion(docSnapshot.id,docSnapshot.get(rhit.KEY_TITLE), docSnapshot.get(rhit.KEY_CONTENT),docSnapshot.get(rhit.KEY_SECTION))
+			return theDiscussion
+	   }
 
 
 }
@@ -94,7 +144,36 @@ rhit.HomePageController = class{
 		document.querySelector("#WarsSectionButton").onclick = (event) => {
 			window.location.href = "/WarsSection.html"
 		}
-		
+		document.querySelector("#welcomeWords").innerHTML = `Welcome ${rhit.username}`;
+
+		rhit.theDiscussionManager.beginListening(this.updateHomePage.bind(this))
+	}
+	updateHomePage(){
+		//Create new Container
+		const newList = htmlToElement('<div id = "HomepagePostContainer"></div>');
+		//Fill the HomepagePostContainer with quote cards using a loop
+		for(let i =0;i<2;i++){
+			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
+			const newCard = this.creatCard(thePost);
+
+			newCard.onclick = (event) => {
+				console.log("YEAH");
+			}
+			newList.appendChild(newCard);
+		}
+		const oldList = document.querySelector("#HomepagePostContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+		oldList.parentElement.appendChild(newList);
+	}
+
+	creatCard(discussion){
+		return htmlToElement(`<div class="card" style="width: 18rem;">
+		<div class="card-body">
+		  <h5 class="card-title">${discussion.title}</h5>
+		  <p class="card-text">${discussion.content}</p>
+		</div>
+	  </div>`);
 	}
 }
 //Controller for the Wars Section Page
@@ -103,7 +182,9 @@ rhit.WarsSectionPageController = class{
 		document.querySelector("#postNewDiscussion").onclick = (event) => {
 			const title = document.querySelector("#inputTitle").value;
 			const content = document.querySelector("#inputContent").value;
-			console.log(`title is${title}, content is ${content}.`);
+			const section = document.querySelector('input[name="sectionOption"]:checked').value;
+			//add the new poast to the manager
+			rhit.theDiscussionManager.add(title, content, section);		
 		}
 	}
 }
@@ -142,13 +223,15 @@ rhit.AuthManager = class{
 			 console.log("Display name: " ,displayName);
 			 console.log("email:" ,email);
 			 console.log("photoURL: ", photoURL);
-			 document.querySelector("#welcomeWords").innerHTML = `Welcome ${email}`;
+			 
 
 			}else{
 				console.log("There is no user signed in.");
 				//User is signed out
 			}
 			this._user = user;
+			rhit.username = this._user.email;
+			
 			changeListener();
 
 		});
@@ -208,6 +291,7 @@ rhit.main = function () {
 	rhit.theAuthManager.beginListening(() => {
 		rhit.checkForRedirects();
 		rhit.intialize();
+
 	})
 
 };

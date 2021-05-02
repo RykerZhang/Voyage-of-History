@@ -58,17 +58,10 @@
             <label for="inputContent" class = "bmd-label-floating">Content</label>
             <input type="text" class="form-control" id="inputContent" >
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioGeneral" value="General">
-            <label class="form-check-label" for="inlineRadio1">General</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioAsia" value="Asia">
-            <label class="form-check-label" for="inlineRadio2">Asia</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioWars" value="Wars">
-            <label class="form-check-label" for="inlineRadio2">Wars</label>
+          <div id = "checkboxForSections">
+            <input type="radio" id="RadioOptionGeneral" name="sectionOption" value="General"> General
+            <input type="radio" id="RadioOptionAsia" name="sectionOption" value="Asia"> Asia
+            <input type="radio" id="RadioOptionWars" name="sectionOption" value="Wars" checked="checked"> Wars
           </div>
       </div>
       <div class="modal-footer">
