@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Voyage of History</title>
+</head>
+
+<body>
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+      <div class="navbar navbar-dark bg-faded fixed-top justify-content-start">
+        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2">
+          <span class="sr-only">Toggle drawer</span>
+          <i class="material-icons">menu</i>
+        </button>
+        <a class="navbar-brand" href="/homePage.html">Timelines</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="navbar-brand" href="/more.html">More</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="navbar-brand" href="#">Favorites</a>
+        <div class="container">
+          <form action="" class="parent" style=" right: 20px; top:13px; position: fixed;">
+            <input type="text" class="search" placeholder="Search For...">
+            <input type="button" name="" id="" class="btn">
+          </form>
+        </div>
+      </div>
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      <header>
+        <a class="navbar-brand">Personal</a>
+      </header>
+      <div id="welcomeWords"></div>
+      <ul class="list-group">
+        <a id="HomeSignOut" class="list-group-item"><i class="material-icons">login</i>Log Out</a>
+      </ul>
+    </div>
+    <main class="bmd-layout-content">
+      <div id="timeLinesPage"  class="container page-container">
+        <h1 style="text-align: center;">TimeLines</h1>
+        <div>
+
+          <div id="timeLinesContainer" >
+            
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">World War I</p>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Between Two Great Wars</p>
+              </div>
+            </div>
+          
+            <div class="card">
+              <div class="card-body" id="WW2">
+                <p class="card-text">World War II</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <hr>
+        <div>Section</div>
+        <div class="btn-group-lg" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-secondary">General</button>
+          <button type="button" class="btn btn-secondary">Asia</button>
+          <button id="WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

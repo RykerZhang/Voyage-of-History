@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
+  <link rel="stylesheet" href="styles/main.css">
+  <title>LOG IN</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark fixed-top justify-content-center">
+    <a class="navbar-brand" href="#">LOG IN</a>
+
+  </nav>
+  <div id="LoginPage" class="container page-container">
+      <!-- forms for entering email or password -->
+      <div id = "loginform" class="row">
+        <div class="col">
+          <input id = "emailAddress" type="text" class="form-control" placeholder="Email Address">
+        </div>
+        <div class="col">
+          <input id = "password" type="text" class="form-control" placeholder="Password">
+        </div>
+      </div>
+
+      <!-- Button for creating account -->
+      <div id = "LoginButtonGroup">
+      <button id = "CreateAccountButton" type = "button" class = "btn btn-outline-info">Create Account</button>
+      <button id = "logInWithExistingAccountButton" type="button" class = "btn btn-outline-info">Log into Existing Account</button>
+      </div>
+
+      <!-- Card for login with other methods -->
+      <div id="otherSignMethodsCard" class="card text-center">
+        <div id = "otherSignMethodsCardHeader"class="card-header">
+          You can also sign in with other methods
+        </div>
+        <div class="card-body">
+          <div id="firebaseui-auth-container"></div>
+        </div>
+        
+      </div>
+
+  </div>
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>
