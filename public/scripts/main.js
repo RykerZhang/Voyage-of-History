@@ -221,6 +221,65 @@ rhit.LoginPageController = class {
 	}
 }
 
+rhit.morePageController = class{
+	constructor(){
+		document.querySelector("#timeLines").onclick = (event) => {
+			window.location.href=("/timeLines.html");
+			//add the new poast to the manager		
+		}
+	}
+}
+
+rhit.timeLinesPageController = class{
+	constructor(){
+		document.querySelector("#WW2").onclick = (event) => {
+			window.location.href=("/singleTimeLine.html");
+			//add the new poast to the manager		
+		}
+	}
+}
+
+rhit.favoritePageController = class{
+	constructor(){
+		document.querySelector("#HomeSignOut").onclick = (event) => {
+			console.log("You sign out");
+			rhit.theAuthManager.signOut();
+		}
+		document.querySelector("#WarsSectionButton").onclick = (event) => {
+			window.location.href = "/WarsSection.html"
+		}
+		document.querySelector("#welcomeWords").innerHTML = `Welcome ${rhit.username}`;
+
+		rhit.theDiscussionManager.beginListening(this.updateFavoritePage.bind(this))
+	}
+	updateFavoritePage(){
+		//Create new Container
+		const newList = htmlToElement('<div id = "favoritePostContainer"></div>');
+		//Fill the HomepagePostContainer with quote cards using a loop
+		for(let i =0;i<2;i++){
+			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
+			const newCard = this.creatCard(thePost);
+
+			newCard.onclick = (event) => {
+				console.log("YEAH");
+			}
+			newList.appendChild(newCard);
+		}
+		const oldList = document.querySelector("#favoritePostContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+		oldList.parentElement.appendChild(newList);
+	}
+	creatCard(discussion){
+		return htmlToElement(`<div class="card w-75">
+		<div class="card-body">
+		  <h5 class="card-title">${discussion.title}</h5>
+		  <p class="card-text">${discussion.content}</p>
+		</div>
+	  </div>`);
+	}
+}
+
 //Authentication Manager
 rhit.AuthManager = class{
 	constructor(){
@@ -313,6 +372,20 @@ rhit.main = function () {
 
 	})
 
+	if (document.querySelector("#morePage")) {
+		console.log("U re on more page.")	
+		new rhit.morePageController();
+	}
+
+	if (document.querySelector("#timeLinesPage")) {
+		console.log("U re on timeLines page.")	
+		new rhit.timeLinesPageController();
+	}
+
+	if (document.querySelector("#favoritePage")) {
+		console.log("U re on favorites page.")	
+		new rhit.favoritePageController();
+	}
 };
 
 rhit.main();
