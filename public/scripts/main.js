@@ -46,6 +46,7 @@ rhit.intialize = function(){
 		const uid = urlParams.get("uid");
 		//make new pagecontroller for home page
 		rhit.theDiscussionManager = new rhit.DiscussionManager(uid)
+		console.log("UID IS", uid);
 		new this.HomePageController();
 	}
 	//initialize the warsectionpage
@@ -100,7 +101,7 @@ rhit.DiscussionManager = class{
 			[rhit.KEY_CONTENT]:content,
 			[rhit.KEY_SECTION]:section,
 			[rhit.KEY_TITLE]: title,
-			[rhit.FB_KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
+			[rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
 		})
 		.then(function (docRef){
 			console.log("Document written with ID: ", docRef.id);
@@ -131,6 +132,10 @@ rhit.DiscussionManager = class{
 		const theDiscussion = new rhit.Discussion(docSnapshot.id,docSnapshot.get(rhit.KEY_TITLE), docSnapshot.get(rhit.KEY_CONTENT),docSnapshot.get(rhit.KEY_SECTION))
 			return theDiscussion
 	   }
+
+	get length(){
+		return this._documentSnapshots.length;
+	}
 
 
 }
@@ -168,7 +173,7 @@ rhit.HomePageController = class{
 	}
 
 	creatCard(discussion){
-		return htmlToElement(`<div class="card" style="width: 18rem;">
+		return htmlToElement(`<div class="card w-75">
 		<div class="card-body">
 		  <h5 class="card-title">${discussion.title}</h5>
 		  <p class="card-text">${discussion.content}</p>
@@ -187,8 +192,21 @@ rhit.WarsSectionPageController = class{
 			rhit.theDiscussionManager.add(title, content, section);		
 		}
 	}
+	updateWarSectionPage(){
+		
+	}
 }
 
+rhit.DetailPostController = class{
+	constructor(){}
+	updateView(){}
+}
+
+rhit.SinglePostController = class{
+	constructor(postID){
+		this._documentSnapshot = {}
+	}
+}
 //Controller for the login page
 rhit.LoginPageController = class {
 	constructor() {
@@ -211,6 +229,8 @@ rhit.AuthManager = class{
 	//BEGIN Listening:
 	beginListening(changeListener){
 		firebase.auth().onAuthStateChanged((user) => {
+			this._user = user;
+
 			if (user) {
 			  // User is signed in, see docs for a list of available properties
 			  // https://firebase.google.com/docs/reference/js/firebase.User
@@ -224,13 +244,12 @@ rhit.AuthManager = class{
 			 console.log("email:" ,email);
 			 console.log("photoURL: ", photoURL);
 			 
+			 rhit.username = this._user.email;
 
 			}else{
 				console.log("There is no user signed in.");
 				//User is signed out
 			}
-			this._user = user;
-			rhit.username = this._user.email;
 			
 			changeListener();
 
