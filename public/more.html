@@ -18,11 +18,10 @@
           <span class="sr-only">Toggle drawer</span>
           <i class="material-icons">menu</i>
         </button>
-        <a class="navbar-brand" href="#">Voyage of History</a>
+        <a class="navbar-brand" href="/homePage.html">More</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="navbar-brand" href="/more.html">More</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="navbar-brand" href="#">Favorites</a>
+
         <div class="container">
           <form action="" class="parent" style=" right: 20px; top:13px; position: fixed;">
             <input type="text" class="search" placeholder="Search For...">
@@ -35,47 +34,58 @@
       <header>
         <a class="navbar-brand">Personal</a>
       </header>
-      <div id = "welcomeWords"></div>
+      <div id="welcomeWords"></div>
       <ul class="list-group">
-        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
+        <a id="HomeSignOut" class="list-group-item"><i class="material-icons">login</i>Log Out</a>
       </ul>
     </div>
     <main class="bmd-layout-content">
-      <div id="HomePage" class="container page-container">
-        <div>Recent Posts
+      <div id="morePage" class="container page-container">
+        <h1 style="text-align: center;">Tools</h1>
+        <div>
 
-        <div id = "HomepagePostContainer">
-        <!-- Example Card1 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div id=morePageContainer">
+
+            <div class="card" style="width: 50vh;">
+              <div class="card-body">
+                <img class="img-fluid card-img-top" style="width: 60%;"
+                  src="https://th.bing.com/th/id/OIP.d0-5njOEp9CD3IKx9A7mTgHaID?w=176&h=192&c=7&o=5&pid=1.7"
+                  alt="Earth">
+                <p class="card-text">History World Maps</p>
+              </div>
+            </div>
+
+            <div class="card" style="width: 50vh;" id="timeLines">
+              <div class="card-body">
+                <img class="img-fluid card-img-top"
+                  src="https://th.bing.com/th/id/OIP.0p4mWpDvuN-yPUURR-z14QHaEZ?w=278&h=180&c=7&o=5&pid=1.7"
+                  alt="timeLines">
+                <p class="card-text">Timelines</p>
+              </div>
+            </div>
+
+            <div class="card" style="width: 50vh;">
+              <div class="card-body">
+                <img class="img-fluid card-img-top" style="width: 60%;"
+                  src="https://th.bing.com/th/id/OIP.cWfojSuY3vYiKhUCiacd_gHaHa?w=201&h=201&c=7&o=5&pid=1.7"
+                  alt="Other Documents">
+                <p class="card-text">Useful Charts</p>
+              </div>
+            </div>
+
           </div>
-        </div> -->
-        <!-- Example Card2 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-        <!-- Recent Posts end -->
-        
-        <!-- Section Part -->
-        
-      </div>
-    </div>
-    <hr>
-      <div>Section</div>
+        </div>
+        <hr>
+        <div>Section</div>
         <div class="btn-group-lg" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary">General</button>
           <button type="button" class="btn btn-secondary">Asia</button>
-          <button id = "WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
+          <button id="WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
         </div>
       </div>
     </main>
   </div>
-  
+
 
 
   <script src="scripts/jquery.min.js"></script>

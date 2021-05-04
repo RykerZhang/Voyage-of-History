@@ -18,7 +18,7 @@
           <span class="sr-only">Toggle drawer</span>
           <i class="material-icons">menu</i>
         </button>
-        <a class="navbar-brand" href="#">Voyage of History</a>
+        <a class="navbar-brand" href="/homePage.html">Timelines</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="navbar-brand" href="/more.html">More</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -35,47 +35,49 @@
       <header>
         <a class="navbar-brand">Personal</a>
       </header>
-      <div id = "welcomeWords"></div>
+      <div id="welcomeWords"></div>
       <ul class="list-group">
-        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
+        <a id="HomeSignOut" class="list-group-item"><i class="material-icons">login</i>Log Out</a>
       </ul>
     </div>
     <main class="bmd-layout-content">
-      <div id="HomePage" class="container page-container">
-        <div>Recent Posts
+      <div id="timeLinesPage"  class="container page-container">
+        <h1 style="text-align: center;">TimeLines</h1>
+        <div>
 
-        <div id = "HomepagePostContainer">
-        <!-- Example Card1 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div id="timeLinesContainer" >
+            
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">World War I</p>
+              </div>
+            </div>
+            
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Between Two Great Wars</p>
+              </div>
+            </div>
+          
+            <div class="card">
+              <div class="card-body" id="WW2">
+                <p class="card-text">World War II</p>
+              </div>
+            </div>
+
           </div>
-        </div> -->
-        <!-- Example Card2 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-        <!-- Recent Posts end -->
-        
-        <!-- Section Part -->
-        
-      </div>
-    </div>
-    <hr>
-      <div>Section</div>
+        </div>
+        <hr>
+        <div>Section</div>
         <div class="btn-group-lg" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary">General</button>
           <button type="button" class="btn btn-secondary">Asia</button>
-          <button id = "WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
+          <button id="WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
         </div>
       </div>
     </main>
   </div>
-  
+
 
 
   <script src="scripts/jquery.min.js"></script>
