@@ -4,6 +4,7 @@ var rhit = rhit || {};
 rhit.theAuthManager = null;
 rhit.username = null;
 rhit.theDiscussionManager = null;
+theSinglePostManager = null;
 
 rhit.COLLECTION_DISCUSSION = "Discussion";
 rhit.KEY_TITLE = "Title";
@@ -60,6 +61,26 @@ rhit.intialize = function(){
 	if(document.querySelector("#LoginPage")){
 		new this.LoginPageController();
 		rhit.startFirebaseUI();
+	}
+	if (document.querySelector("#morePage")) {
+		new rhit.morePageController();
+	}
+	if (document.querySelector("#favoritePage")) {
+		new rhit.favoritePageController();
+	}
+	
+	if (document.querySelector("#timeLinesPage")) {
+		new rhit.timeLinesPageController();
+	}
+	if(document.querySelector("#discussionDetailPage")){
+		const discussionId = urlParams.get("id");
+		if(!discussionId){
+			console.log("Error!");
+			window.location.href = "/";
+		}
+		rhit.theSinglePostManager = new rhit.SinglePostManager(discussionId);
+		console.log(discussionId);
+		new rhit.DetailPostController();
 
 	}
 }
@@ -157,12 +178,14 @@ rhit.HomePageController = class{
 		//Create new Container
 		const newList = htmlToElement('<div id = "HomepagePostContainer"></div>');
 		//Fill the HomepagePostContainer with quote cards using a loop
-		for(let i =0;i<2;i++){
+		for(let i =0;i<3;i++){
 			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
 			const newCard = this.creatCard(thePost);
 
 			newCard.onclick = (event) => {
 				console.log("YEAH");
+				window.location.href = `/discussion.html?id=${thePost.id}`;
+
 			}
 			newList.appendChild(newCard);
 		}
@@ -191,20 +214,121 @@ rhit.WarsSectionPageController = class{
 			//add the new poast to the manager
 			rhit.theDiscussionManager.add(title, content, section);		
 		}
+		rhit.theDiscussionManager.beginListening(this.updateWarSectionPage.bind(this))
+
 	}
 	updateWarSectionPage(){
-		
+		const newList = htmlToElement('<div id = "WarSectionPagePostContainer"></div>');
+		for(let i=0;i<rhit.theDiscussionManager.length;i++){
+			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
+			if(thePost.section == "Wars"){
+				const newCard = this.creatCard(thePost);
+				newCard.onclick = (event) => {
+					console.log("YEAH");
+				}
+				newList.appendChild(newCard);
+			}
+		}
+
+		const oldList = document.querySelector("#WarSectionPagePostContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+		oldList.parentElement.appendChild(newList);
+	}
+	creatCard(discussion){
+		return htmlToElement(`<div class="card w-75">
+		<div class="card-body">
+		  <h5 class="card-title">${discussion.title}</h5>
+		  <p class="card-text">${discussion.content}</p>
+		</div>
+	  </div>`);
 	}
 }
 
 rhit.DetailPostController = class{
-	constructor(){}
-	updateView(){}
+	constructor(){
+		document.querySelector("#menuSignOut").addEventListener("click" , (event) => {
+			rhit.theAuthManager.signOut();
+		});
+		document.querySelector("#submitEditContent").addEventListener("click",(event) => {
+			const content = document.querySelector("#inputContent").value;
+			rhit.theSinglePostManager.update(content);
+		})
+		$("#editPostDialog").on("show.bs.modal",(event) => {
+			//Pre animation	
+			document.querySelector("#inputContent").value = rhit.theSinglePostManager.content;
+			console.log(rhit.theSinglePostManager.content);
+			})
+	
+		$("#editPostDialog").on("shown.bs.modal",(event) => {
+		// Post animation
+		document.querySelector("#inputContent").focus();
+		});
+		
+		document.querySelector("#submitDeletePost").addEventListener("click" , (event) => {
+			rhit.theSinglePostManager.delete().then(() => {
+				console.log("Document successfully deleted!");
+				window.location.href="/homePage.html";
+			}).catch((error) => {
+				console.error("Error removing document: ", error);
+			});
+		});
+		rhit.theSinglePostManager.beginListening(this.updateView.bind(this));
+	}
+	updateView(){
+		document.querySelector("#cardTitle").innerHTML = rhit.theSinglePostManager.title;
+		document.querySelector("#cardContent").innerHTML = rhit.theSinglePostManager.content;
+	}
 }
 
-rhit.SinglePostController = class{
+rhit.SinglePostManager = class{
 	constructor(postID){
 		this._documentSnapshot = {}
+		this._unsubscribe = null;
+		this._ref = firebase.firestore().collection(rhit.COLLECTION_DISCUSSION).doc(postID);
+	}
+	beginListening(changeListener) {
+
+		this._unsubscribe=this._ref.onSnapshot((doc) => {
+			if (doc.exists) {
+				console.log("Document data:", doc.data());
+				this._documentSnapshot = doc;
+				changeListener();
+			} else {
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+		});
+	}
+	stopListening() {
+		this._unsubscribe();
+	  }
+	update(content){
+		  this._ref.update({
+			  [rhit.KEY_TITLE]:title,
+			  [rhit.KEY_CONTENT]:content,
+			  [rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
+		  })
+		  .then(()=>{
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch(function(error){
+			console.log("Error adding document: ", error);
+		});
+	  }
+	delete() {
+		return this._ref.delete();
+	}
+
+	get title(){
+		return this._documentSnapshot.get(rhit.KEY_TITLE);
+	}
+	get content(){
+		return this._documentSnapshot.get(rhit.KEY_CONTENT);
+	}
+	get author(){
+		return this._documentSnapshot.get(rhit.KEY_AUTHOR);
+
 	}
 }
 //Controller for the login page
@@ -372,20 +496,10 @@ rhit.main = function () {
 
 	})
 
-	if (document.querySelector("#morePage")) {
-		console.log("U re on more page.")	
-		new rhit.morePageController();
-	}
+	
 
-	if (document.querySelector("#timeLinesPage")) {
-		console.log("U re on timeLines page.")	
-		new rhit.timeLinesPageController();
-	}
 
-	if (document.querySelector("#favoritePage")) {
-		console.log("U re on favorites page.")	
-		new rhit.favoritePageController();
-	}
+	
 };
 
 rhit.main();

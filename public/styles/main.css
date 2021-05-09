@@ -77,3 +77,27 @@ body {
 .card{
     margin:10px 0px;
 }
+
+#welcomeWordsInWarPage1{
+    color:purple;
+
+    text-align:center;
+}
+
+#welcomeWordsInWarPage2{
+    color:purple;
+    text-align:center;
+}
+
+#columns{
+    column-count: 3;
+    column-gap:10px;
+}
+
+/* .bmd-layout-container{
+    height: 100vh;
+} */
+
+.dropdown-menu-right{
+    left:-128px;
+}
