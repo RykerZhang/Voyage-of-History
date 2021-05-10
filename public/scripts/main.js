@@ -90,6 +90,7 @@ rhit.intialize = function(){
 			window.location.href = "/";
 		}
 
+		rhit.theFollowingManager = new rhit.FollowingManager(null);
 		rhit.theSinglePostManager = new rhit.SinglePostManager(discussionId);
 		console.log(discussionId);
 		new rhit.DetailPostController();
@@ -364,6 +365,8 @@ rhit.WarsSectionPageController = class{
 				const newCard = this.creatCard(thePost);
 				newCard.onclick = (event) => {
 					console.log("YEAH");
+					window.location.href = `/discussion.html?id=${thePost.id}`;
+
 				}
 				newList.appendChild(newCard);
 			}
@@ -418,6 +421,8 @@ rhit.GeneralSectionPageController = class{
 				const newCard = this.creatCard(thePost);
 				newCard.onclick = (event) => {
 					console.log("YEAH");
+					window.location.href = `/discussion.html?id=${thePost.id}`;
+
 				}
 				newList.appendChild(newCard);
 			}
@@ -468,6 +473,12 @@ rhit.DetailPostController = class{
 				console.error("Error removing document: ", error);
 			});
 		});
+
+		document.querySelector("#submitAddResponse").addEventListener("click",(event) => {
+			const content = document.querySelector("#inputReponse").value;
+			rhit.theFollowingManager.add(content,rhit.theSinglePostManager.title);
+
+		})
 		rhit.theSinglePostManager.beginListening(this.updateView.bind(this));
 	}
 	updateView(){
@@ -496,8 +507,6 @@ rhit.DetailPostController = class{
 		  });
 	 });
 
-
-
 		const oldList = document.querySelector("#FollowingsContainer");
 		oldList.removeAttribute("id");
 		oldList.hidden = true;
@@ -505,12 +514,11 @@ rhit.DetailPostController = class{
 	}
 
 	creatCard(following){
-		return htmlToElement(`<div class="card border-success mb-3" style="max-width: 18rem;">
-		<div class="card-header bg-transparent border-success">${following.author}</div>
-		<div class="card-body text-success">
+		return htmlToElement(`<div class="card border-dark mb-3 w-75">
+		<div class="card-header bg-transparent border-dark">${following.author}:</div>
+		<div id = "followings" class="card-body text-dark">
 		  <p class="card-text">${following.content}</p>
 		</div>
-		<div class="card-footer bg-transparent border-success">Footer</div>
 	  </div>`);
 	
 	}
@@ -566,19 +574,7 @@ rhit.SinglePostManager = class{
 
 	}
 }
-//Controller for the login page
-rhit.LoginPageController = class {
-	constructor() {
-		
-		document.querySelector("#CreateAccountButton").onclick = (event) => {
-			rhit.theAuthManager.signUp();
-		}
 
-		document.querySelector("#logInWithExistingAccountButton").onclick = (event) => {
-			rhit.theAuthManager.signIn();
-		}
-	}
-}
 
 rhit.morePageController = class{
 	constructor(){
@@ -638,7 +634,19 @@ rhit.favoritePageController = class{
 	  </div>`);
 	}
 }
+//Controller for the login page
+rhit.LoginPageController = class {
+	constructor() {
+		
+		document.querySelector("#CreateAccountButton").onclick = (event) => {
+			rhit.theAuthManager.signUp();
+		}
 
+		document.querySelector("#logInWithExistingAccountButton").onclick = (event) => {
+			rhit.theAuthManager.signIn();
+		}
+	}
+}
 //Authentication Manager
 rhit.AuthManager = class{
 	constructor(){

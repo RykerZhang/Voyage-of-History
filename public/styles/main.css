@@ -3,7 +3,7 @@ body {
 }
 
 .navbar {
-    background-color: #800000;
+    background-color: purple;
     color: white;
 }
 
@@ -18,7 +18,7 @@ body {
 }
 
 .bmd-layout-drawer>header{
-    background-color:#800000;
+    background-color:purple;
     color: white;
 
 }
@@ -56,12 +56,12 @@ body {
     margin-top:5px;
     font-size: 2em;
     text-align:center;
-    color:#800000
+    color:purple
 }
 
 #fab{
     position: fixed;
-    background:#800000;
+    background:purple;
     color: white;
     right:20px;
     bottom: 20px;
@@ -80,7 +80,6 @@ body {
 
 #welcomeWordsInWarPage1{
     color:purple;
-
     text-align:center;
 }
 
@@ -99,12 +98,12 @@ body {
 } */
 
 .dropdown-menu-right{
+    
     left:-128px;
 }
 
 #welcomeWordsInGeneralPage1{
     color:purple;
-
     text-align:center;
 }
 
@@ -112,3 +111,15 @@ body {
     color:purple;
     text-align:center;
 }
+
+#followings{
+    font-size:18px
+}
+
+#WW2TimelinePicture{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+

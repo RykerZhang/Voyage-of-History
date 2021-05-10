@@ -24,7 +24,13 @@
         <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="lr1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="material-icons">more_vert</i>
         </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="lr1">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="mw2">
+          <div class="switch">
+            <label>
+              <input type="checkbox" checked>
+              Add to favorite
+            </label>
+          </div>
           <button id = "EditPsotContent" class="dropdown-item" type="button"
           data-toggle = "modal" data-target = "#editPostDialog">
             <i class="material-icons">edit</i>&nbsp;&nbsp;Edit</button>
@@ -59,16 +65,20 @@
     <div>Follwoings:</div>
     <div id = "FollowingsContainer">
     <!-- Card for follwings -->
-    <div class="card border-success mb-3" style="max-width: 18rem;">
-      <div class="card-header bg-transparent border-success">Header</div>
-      <div class="card-body text-success">
-        <h5 class="card-title">Success card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
+      <div class="card-header bg-transparent border-dark"></div>
+      <div class="card-body text-dark">
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
       </div>
-      <div class="card-footer bg-transparent border-success">Footer</div>
     </div>
     <!-- End of the card for follwings -->
     </div>
+
+    <button id = "fab" type="button" class="btn bmd-btn-fab" data-toggle="modal" data-target="#addFollowingDialog">
+      <i class="material-icons">add</i>
+    </button>
+
   </div>
 </main>
 
@@ -114,6 +124,30 @@
   </div>
 </div>
 
+ <!-- Modal -->
+ <div class="modal fade" id="addFollowingDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Add your response</h5>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group bmd-form-group">
+            <label for="inputReponse" class = "bmd-label-floating">Content</label>
+            <input type="text" class="form-control" id="inputReponse" >
+            <span class = "bmd-help">Add your response here</span>
+          </div>
+             
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        <button id = "submitAddResponse" type="button" class="btn btn-primary" data-dismiss="modal">CREATE</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End -->
 
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
