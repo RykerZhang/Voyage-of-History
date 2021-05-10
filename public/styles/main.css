@@ -101,3 +101,14 @@ body {
 .dropdown-menu-right{
     left:-128px;
 }
+
+#welcomeWordsInGeneralPage1{
+    color:purple;
+
+    text-align:center;
+}
+
+#welcomeWordsInGeneralPage2{
+    color:purple;
+    text-align:center;
+}

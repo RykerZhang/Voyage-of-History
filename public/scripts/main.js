@@ -4,7 +4,9 @@ var rhit = rhit || {};
 rhit.theAuthManager = null;
 rhit.username = null;
 rhit.theDiscussionManager = null;
-theSinglePostManager = null;
+rhit.theSinglePostManager = null;
+rhit.theFollowingManager = null;
+rhit.theSingleFollowingManager = null;
 
 rhit.COLLECTION_DISCUSSION = "Discussion";
 rhit.KEY_TITLE = "Title";
@@ -12,6 +14,9 @@ rhit.KEY_CONTENT = "Content";
 rhit.KEY_SECTION = "Section";
 rhit.KEY_LAST_TOUCHED = "lastTouched";
 rhit.KEY_AUTHOR = "author";
+
+rhit.COLLECTION_FOLLOWING = "Following";
+rhit.KEY_DISCUSSIONTITLE = "discussionTitle";
 
 
 
@@ -46,7 +51,7 @@ rhit.intialize = function(){
 	if(document.querySelector("#HomePage")){
 		const uid = urlParams.get("uid");
 		//make new pagecontroller for home page
-		rhit.theDiscussionManager = new rhit.DiscussionManager(uid)
+		rhit.theDiscussionManager = new rhit.DiscussionManager(uid);
 		console.log("UID IS", uid);
 		new this.HomePageController();
 	}
@@ -54,8 +59,14 @@ rhit.intialize = function(){
 	if(document.querySelector("#WarsSectionPage")){
 		const uid = urlParams.get("uid");
 		//make new discussionmanager and pagecontroller so that the data will be sent to the backend
-		rhit.theDiscussionManager = new rhit.DiscussionManager(uid)
+		rhit.theDiscussionManager = new rhit.DiscussionManager(uid);
 		new this.WarsSectionPageController();
+	}
+	//initialize the GeneralSectionPage
+	if(document.querySelector("#GeneralSectionPage")){
+		const uid = urlParams.get("uid");
+		rhit.theDiscussionManager = new rhit.DiscussionManager(uid);
+		new this.GeneralSectionPageController();
 	}
 	//initialize the loginpage
 	if(document.querySelector("#LoginPage")){
@@ -78,6 +89,7 @@ rhit.intialize = function(){
 			console.log("Error!");
 			window.location.href = "/";
 		}
+
 		rhit.theSinglePostManager = new rhit.SinglePostManager(discussionId);
 		console.log(discussionId);
 		new rhit.DetailPostController();
@@ -157,9 +169,122 @@ rhit.DiscussionManager = class{
 	get length(){
 		return this._documentSnapshots.length;
 	}
+}
 
+//Class for the follwings
+rhit.Following = class{
+	constructor(id,author, content, discussionTitle){
+		this.id = id;
+		this.author = author;
+		this.content = content;
+		this.discussionTitle = discussionTitle;
+	}
 
 }
+//Manager for the Followings
+rhit.FollowingManager = class{
+	constructor(uid){
+		this._uid = uid;
+		this._documentSnapshots = [];
+		this._ref = firebase.firestore().collection(rhit.COLLECTION_FOLLOWING);
+		this._unsubscribe = null;
+	}
+
+	add(content, discussionTitle){
+		//add parameters to the backend
+		this._ref.add({
+			[rhit.KEY_AUTHOR]:rhit.username,
+			[rhit.KEY_CONTENT]:content,
+			[rhit.KEY_DISCUSSIONTITLE]:discussionTitle,
+			[rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
+		})
+		.then(function (docRef){
+			console.log("Document written with ID: ", docRef.id);
+		})
+		.catch(function(error){
+			console.log("Error adding document: ", error);
+		});
+	  }
+	
+	beginListening(changeListener){
+		// sort the posts in descending time, limit to 2 posts
+		let query = this._ref.orderBy(rhit.KEY_LAST_TOUCHED,"desc").limit(20)
+		if(this._uid){
+			query = query.where(rhit.KEY_AUTHOR,"==",this._uid);
+		}
+		this._unsubscribe = query.onSnapshot((querySnapshot) => {
+			console.log("Post Update");
+			this._documentSnapshots = querySnapshot.docs;
+			changeListener();
+    	});
+	}
+	stopListening() {
+		this._unsubscribe();
+	}
+	//get discussion at certain index in the firestore
+	getFollowingAt(index) { 
+		const docSnapshot = this._documentSnapshots[index];
+		const theFollowing = new rhit.Following(docSnapshot.id,docSnapshot.get(rhit.KEY_AUTHOR),docSnapshot.get(rhit.KEY_CONTENT), docSnapshot.get(rhit.KEY_DISCUSSIONTITLE))
+			return theFollowing
+	   }
+
+	get length(){
+		return this._documentSnapshots.length;
+	}
+}
+
+//Manager for the single following
+// rhit.SingleFollowingManager = class{
+// 	constructor(FollowingID){
+// 		this._documentSnapshot = {}
+// 		this._unsubscribe = null;
+// 		this._ref = firebase.firestore().collection(rhit.COLLECTION_FOLLOWING).doc(FollowingID);
+// 	}
+// 	beginListening(changeListener) {
+
+// 		this._unsubscribe=this._ref.onSnapshot((doc) => {
+// 			if (doc.exists) {
+// 				console.log("Document data:", doc.data());
+// 				this._documentSnapshot = doc;
+// 				changeListener();
+// 			} else {
+// 				// doc.data() will be undefined in this case
+// 				console.log("No such document!");
+// 			}
+// 		});
+// 	}
+// 	stopListening() {
+// 		this._unsubscribe();
+// 	  }
+// 	update(content){
+// 		  this._ref.update({
+// 			  [rhit.KEY_TITLE]:title,
+// 			  [rhit.KEY_CONTENT]:content,
+// 			  [rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
+// 		  })
+// 		  .then(()=>{
+// 			console.log("Document written with ID: ", docRef.id);
+// 		})
+// 		.catch(function(error){
+// 			console.log("Error adding document: ", error);
+// 		});
+// 	  }
+// 	delete() {
+// 		return this._ref.delete();
+// 	}
+
+// 	get title(){
+// 		return this._documentSnapshot.get(rhit.KEY_TITLE);
+// 	}
+// 	get content(){
+// 		return this._documentSnapshot.get(rhit.KEY_CONTENT);
+// 	}
+// 	get author(){
+// 		return this._documentSnapshot.get(rhit.KEY_AUTHOR);
+
+// 	}
+// }
+
 //Controller for the HomePage
 rhit.HomePageController = class{
 	constructor(){
@@ -170,6 +295,9 @@ rhit.HomePageController = class{
 		document.querySelector("#WarsSectionButton").onclick = (event) => {
 			window.location.href = "/WarsSection.html"
 		}
+		document.querySelector("#GeneralSectionButton").onclick = (event) => {
+			window.location.href = "/GeneralSection.html"
+		}
 		document.querySelector("#welcomeWords").innerHTML = `Welcome ${rhit.username}`;
 
 		rhit.theDiscussionManager.beginListening(this.updateHomePage.bind(this))
@@ -178,7 +306,7 @@ rhit.HomePageController = class{
 		//Create new Container
 		const newList = htmlToElement('<div id = "HomepagePostContainer"></div>');
 		//Fill the HomepagePostContainer with quote cards using a loop
-		for(let i =0;i<3;i++){
+		for(let i =0;i<4;i++){
 			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
 			const newCard = this.creatCard(thePost);
 
@@ -214,6 +342,17 @@ rhit.WarsSectionPageController = class{
 			//add the new poast to the manager
 			rhit.theDiscussionManager.add(title, content, section);		
 		}
+		$("#addNewPost").on("show.bs.modal",(event) => {
+			//Pre animation	
+			document.querySelector("#inputTitle").value = "";
+			document.querySelector("#inputContent").value = "";
+			});
+	
+		$("#addNewPost").on("shown.bs.modal",(event) => {
+		// Post animation
+		document.querySelector("#inputTitle").focus();
+			});
+
 		rhit.theDiscussionManager.beginListening(this.updateWarSectionPage.bind(this))
 
 	}
@@ -245,6 +384,62 @@ rhit.WarsSectionPageController = class{
 	}
 }
 
+//Page controller for the general section
+rhit.GeneralSectionPageController = class{
+	constructor(){
+		document.querySelector("#postNewDiscussion").onclick = (event) => {
+			const title = document.querySelector("#inputTitle").value;
+			const content = document.querySelector("#inputContent").value;
+			const section = document.querySelector('input[name="sectionOption"]:checked').value;
+			//add the new poast to the manager
+			rhit.theDiscussionManager.add(title, content, section);		
+		}
+
+		$("#addNewPost").on("show.bs.modal",(event) => {
+			//Pre animation	
+			document.querySelector("#inputTitle").value = "";
+			document.querySelector("#inputContent").value = "";
+			});
+	
+		$("#addNewPost").on("shown.bs.modal",(event) => {
+		// Post animation
+		document.querySelector("#inputTitle").focus();
+			});
+
+
+		rhit.theDiscussionManager.beginListening(this.updateWarSectionPage.bind(this))
+
+	}
+	updateWarSectionPage(){
+		const newList = htmlToElement('<div id = "GeneralSectionPagePostContainer"></div>');
+		for(let i=0;i<rhit.theDiscussionManager.length;i++){
+			const thePost = rhit.theDiscussionManager.getDiscussionAt(i);
+			if(thePost.section == "General"){
+				const newCard = this.creatCard(thePost);
+				newCard.onclick = (event) => {
+					console.log("YEAH");
+				}
+				newList.appendChild(newCard);
+			}
+		}
+
+		const oldList = document.querySelector("#GeneralSectionPagePostContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+		oldList.parentElement.appendChild(newList);
+	}
+	creatCard(discussion){
+		return htmlToElement(`<div class="card w-75">
+		<div class="card-body">
+		  <h5 class="card-title">${discussion.title}</h5>
+		  <p class="card-text">${discussion.content}</p>
+		</div>
+	  </div>`);
+	}
+
+}
+
+//The detialPage controller for each post
 rhit.DetailPostController = class{
 	constructor(){
 		document.querySelector("#menuSignOut").addEventListener("click" , (event) => {
@@ -278,6 +473,46 @@ rhit.DetailPostController = class{
 	updateView(){
 		document.querySelector("#cardTitle").innerHTML = rhit.theSinglePostManager.title;
 		document.querySelector("#cardContent").innerHTML = rhit.theSinglePostManager.content;
+
+		//This reveals the followings
+		const newList = htmlToElement('<div id = "FollowingsContainer"></div>');
+		// console.log("The lenght of followings is ", rhit.theFollowingManager.length);
+		// console.log("The lenght of Discussion is ", rhit.theDiscussionManager.length);
+
+		//GET DATA IN COLLECTION
+	  firebase.firestore().collection(rhit.COLLECTION_FOLLOWING).where(rhit.KEY_DISCUSSIONTITLE, "==",rhit.theSinglePostManager.title).get().then((querySnapshot) => {
+	 	 querySnapshot.forEach((doc) => {
+			// doc.data() is never undefined for query doc snapshots
+			 console.log(doc.id, " => ", doc.data());	
+
+			const data = doc.data();
+			this.author = data.author;
+			this.content = data.Content;
+			this.discussionTitle = data.discussionTitle;
+
+			const theFollowing = new rhit.Following(doc.id,this.author, this.content, this.discussionTitle);
+			const newCard = this.creatCard(theFollowing);
+	 		newList.appendChild(newCard);
+		  });
+	 });
+
+
+
+		const oldList = document.querySelector("#FollowingsContainer");
+		oldList.removeAttribute("id");
+		oldList.hidden = true;
+		oldList.parentElement.appendChild(newList);
+	}
+
+	creatCard(following){
+		return htmlToElement(`<div class="card border-success mb-3" style="max-width: 18rem;">
+		<div class="card-header bg-transparent border-success">${following.author}</div>
+		<div class="card-body text-success">
+		  <p class="card-text">${following.content}</p>
+		</div>
+		<div class="card-footer bg-transparent border-success">Footer</div>
+	  </div>`);
+	
 	}
 }
 
