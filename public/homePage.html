@@ -18,16 +18,16 @@
           <span class="sr-only">Toggle drawer</span>
           <i class="material-icons">menu</i>
         </button>
-        <a class="navbar-brand" href="#">Voyage of History</a>
+        <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="navbar-brand" href="/more.html">More</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="navbar-brand" href="#">Favorites</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a id = "SearchButton" class="navbar-brand" href="/search.html">Search</a>
+
         <div class="container">
-          <form action="" class="parent" style=" right: 20px; top:13px; position: fixed;">
-            <input type="text" class="search" placeholder="Search For...">
-            <input type="button" name="" id="" class="btn">
-          </form>
+          
+          
+            
         </div>
       </div>
     </header>
@@ -42,6 +42,8 @@
     </div>
     <main class="bmd-layout-content">
       <div id="HomePage" class="container page-container">
+
+        
         <div>Recent Posts
 
         <div id = "HomepagePostContainer">
@@ -77,6 +79,13 @@
   </div>
   
 
+
+  <!-- for the search only version -->
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
+
+<!-- for the default version -->
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CObject.entries%2CObject.assign"></script>
 
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>

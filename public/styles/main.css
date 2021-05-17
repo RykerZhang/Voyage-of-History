@@ -3,7 +3,7 @@ body {
 }
 
 .navbar {
-    background-color: purple;
+    background-image: linear-gradient(284deg, #fcb43a, purple);
     color: white;
 }
 
@@ -122,4 +122,23 @@ body {
   margin-right: auto;
   width: 50%;
 }
+
+#Title_FirstBalkanWar{
+    text-align: center;
+    font-size:38px;
+
+}
+
+#Content_FirstBalkanWar{
+    font-size:18px;
+    line-height: 40px
+}
+
+#pic_FirstBalkanWar{
+    display:block;
+    margin:auto
+}
+
+
+  
 

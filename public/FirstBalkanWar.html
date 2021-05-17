@@ -18,15 +18,15 @@
           <span class="sr-only">Toggle drawer</span>
           <i class="material-icons">menu</i>
         </button>
-        <a class="navbar-brand" href="#">Favorites</a>
+        <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a class="navbar-brand" href="/more.html">More</a>
-
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a id = "SearchButton" class="navbar-brand" href="/search.html">Search</a>
         <div class="container">
-          <form action="" class="parent" style=" right: 20px; top:13px; position: fixed;">
-            <input type="text" class="search" placeholder="Search For...">
-            <input type="button" name="" id="" class="btn">
-          </form>
+          
+          
+            
         </div>
       </div>
     </header>
@@ -34,48 +34,30 @@
       <header>
         <a class="navbar-brand">Personal</a>
       </header>
-      <div id="welcomeWords"></div>
+      <div id = "welcomeWords"></div>
       <ul class="list-group">
-        <a id="HomeSignOut" class="list-group-item"><i class="material-icons">login</i>Log Out</a>
+        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
       </ul>
     </div>
     <main class="bmd-layout-content">
-      <div id="favoritePage" class="container page-container">
-        <div>Favorite Posts
+      <div id="#FirstBalkanWarPage" class="container page-container">
 
-          <div id="favoritePostContainer">
-            <!-- Example Card1 -->
-            <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-            <!-- Example Card2 -->
-            <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-            <!-- Recent Posts end -->
-
-            <!-- Section Part -->
-
-          </div>
-        </div>
+        <div id = "Title_FirstBalkanWar">The First Balkan War(1912)</div>
         <hr>
-        <div>Section</div>
-        <div class="btn-group-lg" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary">General</button>
-          <button type="button" class="btn btn-secondary">Asia</button>
-          <button id="WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
-        </div>
-      </div>
-    </main>
+        <div id="Content_FirstBalkanWar">In 1912, encouraged by the Russians, the Balkan states of Serbia, Greece, and Montenegro formed a Balkan alliance. Their key objective was to force the Ottoman Empire from the Balkans by taking Macedonia and dividing it up between themselves. The Ottoman Empire was already weakened by a war with Italy over Tripolitania the year before and was almost completely driven out of the Balkans in seven weeks. Austria was horrifi ed; it could not accept a strengthened Serbia. Austrian generals called for war. There was a danger, however, that Russia would support its ally, Serbia, and that events could spiral into a wider European war. </div>
+        <hr>
+        <img ID = "pic_FirstBalkanWar" src="/image/map-Balkan-Wars.jpg" alt="First Balkan War">
+      </main>
   </div>
+  
 
 
+  <!-- for the search only version -->
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
+
+<!-- for the default version -->
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CObject.entries%2CObject.assign"></script>
 
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>

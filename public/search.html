@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css">
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./styles/app.css">
+  <link rel="stylesheet" href="./styles/main.css">
+
+
+  <title>public</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 id = "backToHomePage" class="header-title"> Voyage of History</h1>
+    <p class="header-subtitle">
+      Search for countreis, events, and people</p>
+  </header>
+
+
+  <main class="bmd-layout-content">
+      <div id="searchPage" class="container page-container">
+    <div class="search-panel">
+      <div class="search-panel__results">
+        
+          <div class="right-panel">
+            <div id="searchbox"></div>
+            <div id="hits"></div>
+            <div id="pagination"></div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <div id="pagination"></div>
+  </div>
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>$("body").bootstrapMaterialDesign();</script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="https://cdn.jsdelivr.net/algoliasearch/3.32.0/algoliasearchLite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.22.0"></script>
+  <script src="./scripts/app.js"></script>
+  <script src="scripts/main.js"></script>
+
+</body>
+
+</html>

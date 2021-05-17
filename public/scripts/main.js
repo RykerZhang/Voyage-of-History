@@ -1,6 +1,7 @@
 
 var rhit = rhit || {};
 
+
 rhit.theAuthManager = null;
 rhit.username = null;
 rhit.theDiscussionManager = null;
@@ -78,6 +79,9 @@ rhit.intialize = function(){
 	}
 	if (document.querySelector("#favoritePage")) {
 		new rhit.favoritePageController();
+	}
+	if(document.querySelector("#searchPage")){
+		new rhit.searchPageController();
 	}
 	
 	if (document.querySelector("#timeLinesPage")) {
@@ -575,6 +579,19 @@ rhit.SinglePostManager = class{
 	}
 }
 
+rhit.searchPageController = class{
+	constructor(){
+		
+
+		document.querySelector("#backToHomePage").onclick = (event) => {
+			window.location.href = ("/homePage.html");
+		}
+		document.querySelector("#FirstBalkanWar").onclick = (event) => {
+			window.location.href = ("/FirstBalkanWar.html");
+		}
+	}
+}
+
 
 rhit.morePageController = class{
 	constructor(){
@@ -584,6 +601,7 @@ rhit.morePageController = class{
 		}
 	}
 }
+
 
 rhit.timeLinesPageController = class{
 	constructor(){
@@ -732,6 +750,9 @@ rhit.AuthManager = class{
 /** function and class syntax examples */
 rhit.main = function () {
 
+	
+
+
 	rhit.theAuthManager = new rhit.AuthManager();
 	rhit.theAuthManager.beginListening(() => {
 		rhit.checkForRedirects();
@@ -739,7 +760,6 @@ rhit.main = function () {
 
 	})
 
-	
 
 
 	
