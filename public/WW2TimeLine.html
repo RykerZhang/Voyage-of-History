@@ -19,18 +19,18 @@
           <i class="material-icons">menu</i>
         </button>
         <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
+       
         <div class="container">
-          
-          
-            
+         
         </div>
+
       </div>
     </header>
     <div id="dw-s2" class="bmd-layout-drawer bg-faded">
       <header>
         <a class="navbar-brand">Personal</a>
       </header>
-      <div id = "welcomeWords"></div>
+      <div id="welcomeWords"></div>
       <ul class="list-group">
         <a id = "MoreIcon" class="list-group-item" href="/more.html"><i class = "material-icons">description</i>More</a>
         <a id = "SearchIcon" class="list-group-item" href="/search.html"><i class = "material-icons">search</i>Search</a>
@@ -38,51 +38,39 @@
       </ul>
     </div>
     <main class="bmd-layout-content">
-      <div id="HomePage" class="container page-container">
+      <div id="timeLinePage" class="container page-container">
+        <h1 style="text-align: center;">TimeLine for WW2</h1>
+        <div>
 
-        <div>Section</div>
-        
-        <div class="btn-group-lg" role="group" aria-label="Basic example">
-          <button id = "GeneralSectionButton" type="button" class="btn btn-secondary">General</button>
-          <button id = "WarsSectionButton" type="button" class="btn btn-secondary">Wars</button>
+          <div id="timeLinesContainer">
+            <img id = "WW2TimelinePicture" src="image/WW2.jpg">
+            
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Asia</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Europe</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">Africa</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-
-        <div>Recent Posts
-        <div id = "HomepagePostContainer">
-        <!-- Example Card1 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-        <!-- Example Card2 -->
-        <!-- <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-        </div> -->
-        <!-- Recent Posts end -->
+        <hr>
         
-        <!-- Section Part -->
-        
-      </div>
-    </div>
-    <hr>
-      
-      </div>
     </main>
   </div>
-  
 
 
-  <!-- for the search only version -->
-<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
-
-<!-- for the default version -->
-<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch.umd.js"></script>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=Promise%2CObject.entries%2CObject.assign"></script>
 
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>

@@ -19,12 +19,9 @@
           <i class="material-icons">menu</i>
         </button>
         <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="navbar-brand" href="/more.html">More</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a id = "SearchButton" class="navbar-brand" href="/search.html">Search</a>
+        
         <div class="container">
-         
+
         </div>
 
       </div>
@@ -35,39 +32,32 @@
       </header>
       <div id="welcomeWords"></div>
       <ul class="list-group">
-        <a id="HomeSignOut" class="list-group-item"><i class="material-icons">login</i>Log Out</a>
+        <a id = "MoreIcon" class="list-group-item" href="/more.html"><i class = "material-icons">description</i>More</a>
+        <a id = "SearchIcon" class="list-group-item" href="/search.html"><i class = "material-icons">search</i>Search</a>
+        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
       </ul>
     </div>
     <main class="bmd-layout-content">
-      <div id="timeLinePage" class="container page-container">
-        <h1 style="text-align: center;">TimeLine for WW2</h1>
-        <div>
+      <div id="outbreakOfWWIIPage" class="container page-container">
+        <div id="timelineTitle">Outbreak of WWII (1933-1939)</div>
+        <br>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="active-row">
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
 
-          <div id="timeLinesContainer">
-            <img id = "WW2TimelinePicture" src="image/WW2.jpg">
-            
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">Asia</p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">Europe</p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <p class="card-text">Africa</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <hr>
-        
     </main>
   </div>
 
@@ -76,7 +66,10 @@
   <script src="scripts/jquery.min.js"></script>
   <script src="scripts/popper.js"></script>
   <script src="scripts/bootstrap-material-design.js"></script>
-  <script>$("body").bootstrapMaterialDesign();</script>
+  <script>
+    $("body").bootstrapMaterialDesign();
+
+  </script>
   <script src="/__/firebase/7.18.0/firebase-app.js"></script>
   <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
   <script src="/__/firebase/7.18.0/firebase-auth.js"></script>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Voyage of History</title>
+</head>
+
+<body>
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+      <div class="navbar navbar-dark bg-faded fixed-top justify-content-start">
+        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2">
+          <span class="sr-only">Toggle drawer</span>
+          <i class="material-icons">menu</i>
+        </button>
+        <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
+        
+        <div class="container">
+
+        </div>
+
+      </div>
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      <header>
+        <a class="navbar-brand">Personal</a>
+      </header>
+      <div id="welcomeWords"></div>
+      <ul class="list-group">
+        <a id = "MoreIcon" class="list-group-item" href="/more.html"><i class = "material-icons">description</i>More</a>
+        <a id = "SearchIcon" class="list-group-item" href="/search.html"><i class = "material-icons">search</i>Search</a>
+        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
+      </ul>
+    </div>
+    <main class="bmd-layout-content">
+      <div id="betweenTwoGreatWarsPage" class="container page-container">
+        <div id="timelineTitle">Betwwen Two Great Wars (1919-1933)</div>
+        <br>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="active-row">
+              <td>1919</td>
+              <td>Treat of Versailles</td>
+            </tr>
+            <tr class="active-row">
+              <td></td>
+              <td>Treaty of St Germain</td>
+            </tr>
+            <tr class="active-row">
+              <td>1920</td>
+              <td>Establishment of the League of Nations</td>
+            </tr>
+            <tr class="active-row">
+              <td>1922</td>
+              <td>Treaty of Rapallo between Germany and the USSR</td>
+            </tr>
+            <tr class="active-row">
+              <td>1923</td>
+              <td>French occupation of the Ruhr</td>
+            </tr>
+            <tr class="active-row">
+              <td>1924</td>
+              <td>Introduction of the Dawes Plan</td>
+            </tr>
+            <tr class="active-row">
+              <td>1925</td>
+              <td>Locarno  Treaties</td>
+            </tr>
+            <tr class="active-row">
+              <td>1926</td>
+              <td>Germany admitted to League of Nations</td>
+            </tr>
+            <tr class="active-row">
+              <td>1928</td>
+              <td>Kellogg-Briand Pact signed</td>
+            </tr>
+            <tr class="active-row">
+              <td>1929</td>
+              <td>Introcution of the Young Plan</td>
+            </tr>
+            <tr class="active-row">
+              <td></td>
+              <td>Wall Street Crash</td>
+            </tr>
+            <tr class="active-row">
+              <td>1932</td>
+              <td>Lausanne Conference on reparatio payments</td>
+            </tr>
+            <tr class="active-row">
+              <td>1933</td>
+              <td>Hitler appointed Chancellor of Germany</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+    </main>
+  </div>
+
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>
+    $("body").bootstrapMaterialDesign();
+
+  </script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

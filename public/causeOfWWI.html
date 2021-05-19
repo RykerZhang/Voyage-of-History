@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+  <link rel="stylesheet" href="styles/bootstrap-material-design.min.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <title>Voyage of History</title>
+</head>
+
+<body>
+  <div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+      <div class="navbar navbar-dark bg-faded fixed-top justify-content-start">
+        <button class="navbar-toggler" type="button" data-toggle="drawer" data-target="#dw-s2">
+          <span class="sr-only">Toggle drawer</span>
+          <i class="material-icons">menu</i>
+        </button>
+        <a class="navbar-brand" href="/homePage.html">Voyage of History</a>
+        
+        <div class="container">
+
+        </div>
+      </div>
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+      <header>
+        <a class="navbar-brand">Personal</a>
+      </header>
+      <div id="welcomeWords"></div>
+      <ul class="list-group">
+        <a id = "MoreIcon" class="list-group-item" href="/more.html"><i class = "material-icons">description</i>More</a>
+        <a id = "SearchIcon" class="list-group-item" href="/search.html"><i class = "material-icons">search</i>Search</a>
+        <a id = "HomeSignOut" class="list-group-item"><i class = "material-icons">login</i>Log Out</a>
+      </ul>
+    </div>
+    <main class="bmd-layout-content">
+      <div id="causeofWWITimelinePage" class="container page-container">
+        <div id="timelineTitle">Causes of World War One: 1871-1914</div>
+        <br>
+        <table class="styled-table">
+          <thead>
+            <tr class="active-row">
+              <th>Year</th>
+              <th>Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="active-row">
+              <td>1871</td>
+              <td>End of Franco-Prussian War</td>
+            </tr>
+            <tr class="active-row">
+              <td>1873</td>
+              <td>The Three Emperor's League</td>
+            </tr>
+            <tr class="active-row">
+              <td>1879</td>
+              <td>Dual Alliance</td>
+            </tr>
+            <tr class="active-row">
+              <td>1881</td>
+              <td>The Three Emperor's Alliance</td>
+            </tr>
+            <tr class="active-row">
+              <td>1882</td>
+              <td>Triple Alliance</td>
+            </tr>
+            <tr class="active-row">
+              <td>1887</td>
+              <td>Reinsurance Treaty (Germany, Russia)</td>
+            </tr>
+            <tr class="active-row">
+              <td>1888</td>
+              <td>Wihelm becomes German Emperor</td>
+            </tr>
+            <tr class="active-row">
+              <td>1890</td>
+              <td>Bismarck resigns</td>
+            </tr>
+            <tr class="active-row">
+              <td></td>
+              <td>Reinsurance Treaty lapses</td>
+            </tr>
+            <tr class="active-row">
+              <td>1892</td>
+              <td>Franco-Russian Alliance</td>
+            </tr>
+            <tr class="active-row">
+              <td>1897</td>
+              <td>Austro-Russian Agreement</td>
+            </tr>
+            <tr class="active-row">
+              <td>1898</td>
+              <td>Germna Naval Law</td>
+            </tr>
+            <tr class="active-row">
+              <td>1900</td>
+              <td>Second German Naval Law</td>
+            </tr>
+            <tr class="active-row">
+              <td>1902</td>
+              <td>Anglo-Japanses Alliance</td>
+            </tr>
+            <tr class="active-row">
+              <td>1904</td>
+              <td>Russo-Japanses War</td>
+            </tr>
+            <tr class="active-row">
+              <td></td>
+              <td>Entent Cordiale (Britain, France)</td>
+            </tr>
+            <tr class="active-row">
+              <td>1905</td>
+              <td>First Moroccan Crisis</td>
+            </tr>
+            <tr class="active-row">
+              <td>1906</td>
+              <td>Algeciras Crisis</td>
+            </tr>
+            <tr class="active-row">
+              <td>1907</td>
+              <td>Anglo-Russian Entente</td>
+            </tr>
+            <tr class="active-row">
+              <td></td>
+              <td>Triple Entente (Russia, France, Britain)</td>
+            </tr>
+            <tr class="active-row">
+              <td>1908</td>
+              <td>Annexation of Bosnia by Austria-Hungary</td>
+            </tr>
+            <tr class="active-row">
+              <td>1911</td>
+              <td>Second Moroccan Crisis</td>
+            </tr>
+            <tr class="active-row">
+              <td>1912</td>
+              <td>First Balkan War</td>
+            </tr>
+            <tr class="active-row">
+              <td>1913</td>
+              <td>Second Balkan War</td>
+            </tr>
+            <tr class="active-row">
+              <td>1914</td>
+              <td>Archduke Franz Ferdinand assassinated</td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+
+
+
+        <div>
+        </div>
+    </main>
+  </div>
+
+
+
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/popper.js"></script>
+  <script src="scripts/bootstrap-material-design.js"></script>
+  <script>
+    $("body").bootstrapMaterialDesign();
+
+  </script>
+  <script src="/__/firebase/7.18.0/firebase-app.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-analytics.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-auth.js"></script>
+  <script src="/__/firebase/7.18.0/firebase-firestore.js"></script>
+  <script src="/__/firebase/init.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
+</html>

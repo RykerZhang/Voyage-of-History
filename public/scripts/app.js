@@ -21,7 +21,7 @@ search.addWidgets([
       item: `
       <div id = "FirstBalkanWar">
 <article >
-  <h1>{{#helpers.highlight}}{ "attribute": "name" }{{/helpers.highlight}}</h1>
+  <div>{{#helpers.highlight}}{ "attribute": "name" }{{/helpers.highlight}}</div>
 </article></div>
 `,
     },

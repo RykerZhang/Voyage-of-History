@@ -238,57 +238,7 @@ rhit.FollowingManager = class{
 	}
 }
 
-//Manager for the single following
-// rhit.SingleFollowingManager = class{
-// 	constructor(FollowingID){
-// 		this._documentSnapshot = {}
-// 		this._unsubscribe = null;
-// 		this._ref = firebase.firestore().collection(rhit.COLLECTION_FOLLOWING).doc(FollowingID);
-// 	}
-// 	beginListening(changeListener) {
 
-// 		this._unsubscribe=this._ref.onSnapshot((doc) => {
-// 			if (doc.exists) {
-// 				console.log("Document data:", doc.data());
-// 				this._documentSnapshot = doc;
-// 				changeListener();
-// 			} else {
-// 				// doc.data() will be undefined in this case
-// 				console.log("No such document!");
-// 			}
-// 		});
-// 	}
-// 	stopListening() {
-// 		this._unsubscribe();
-// 	  }
-// 	update(content){
-// 		  this._ref.update({
-// 			  [rhit.KEY_TITLE]:title,
-// 			  [rhit.KEY_CONTENT]:content,
-// 			  [rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
-// 		  })
-// 		  .then(()=>{
-// 			console.log("Document written with ID: ", docRef.id);
-// 		})
-// 		.catch(function(error){
-// 			console.log("Error adding document: ", error);
-// 		});
-// 	  }
-// 	delete() {
-// 		return this._ref.delete();
-// 	}
-
-// 	get title(){
-// 		return this._documentSnapshot.get(rhit.KEY_TITLE);
-// 	}
-// 	get content(){
-// 		return this._documentSnapshot.get(rhit.KEY_CONTENT);
-// 	}
-// 	get author(){
-// 		return this._documentSnapshot.get(rhit.KEY_AUTHOR);
-
-// 	}
-// }
 
 //Controller for the HomePage
 rhit.HomePageController = class{
@@ -329,7 +279,7 @@ rhit.HomePageController = class{
 	}
 
 	creatCard(discussion){
-		return htmlToElement(`<div class="card w-75">
+		return htmlToElement(`<div class="card w-100">
 		<div class="card-body">
 		  <h5 class="card-title">${discussion.title}</h5>
 		  <p class="card-text">${discussion.content}</p>
@@ -382,7 +332,7 @@ rhit.WarsSectionPageController = class{
 		oldList.parentElement.appendChild(newList);
 	}
 	creatCard(discussion){
-		return htmlToElement(`<div class="card w-75">
+		return htmlToElement(`<div class="card w-100">
 		<div class="card-body">
 		  <h5 class="card-title">${discussion.title}</h5>
 		  <p class="card-text">${discussion.content}</p>
@@ -438,7 +388,7 @@ rhit.GeneralSectionPageController = class{
 		oldList.parentElement.appendChild(newList);
 	}
 	creatCard(discussion){
-		return htmlToElement(`<div class="card w-75">
+		return htmlToElement(`<div class="card w-100">
 		<div class="card-body">
 		  <h5 class="card-title">${discussion.title}</h5>
 		  <p class="card-text">${discussion.content}</p>
@@ -489,6 +439,17 @@ rhit.DetailPostController = class{
 		document.querySelector("#cardTitle").innerHTML = rhit.theSinglePostManager.title;
 		document.querySelector("#cardContent").innerHTML = rhit.theSinglePostManager.content;
 
+		if(rhit.theSinglePostManager.author==rhit.theAuthManager.uid){
+			document.querySelector("#EditPsotContent").style.display = "flex";
+			document.querySelector("#DeletePost").style.display = "flex";
+		}
+
+		if(rhit.theSinglePostManager.author==rhit.username){
+			document.querySelector("#EditPsotContent").style.display = "flex";
+			document.querySelector("#DeletePost").style.display = "flex";
+		}
+
+
 		//This reveals the followings
 		const newList = htmlToElement('<div id = "FollowingsContainer"></div>');
 		// console.log("The lenght of followings is ", rhit.theFollowingManager.length);
@@ -518,7 +479,7 @@ rhit.DetailPostController = class{
 	}
 
 	creatCard(following){
-		return htmlToElement(`<div class="card border-dark mb-3 w-75">
+		return htmlToElement(`<div class="card border-dark mb-3 w-100">
 		<div class="card-header bg-transparent border-dark">${following.author}:</div>
 		<div id = "followings" class="card-body text-dark">
 		  <p class="card-text">${following.content}</p>
@@ -589,6 +550,7 @@ rhit.searchPageController = class{
 		document.querySelector("#FirstBalkanWar").onclick = (event) => {
 			window.location.href = ("/FirstBalkanWar.html");
 		}
+		
 	}
 }
 
@@ -606,8 +568,18 @@ rhit.morePageController = class{
 rhit.timeLinesPageController = class{
 	constructor(){
 		document.querySelector("#WW2").onclick = (event) => {
-			window.location.href=("/singleTimeLine.html");
+			window.location.href=("/WW2TimeLine.html");
 			//add the new poast to the manager		
+		}
+		document.querySelector("#causeOfWWI").onclick = (event) => {
+			window.location.href=("/causeOfWWI.html");
+			//add the new poast to the manager		
+		}
+		document.querySelector("#outbreakOfWWII").onclick = (event) => {
+			window.location.href=("/outbreakOfWWII.html");
+		}
+		document.querySelector("#betweenTwoGreatWars").onclick = (event) => {
+			window.location.href=("/betweenTwoGreatWars.html");
 		}
 	}
 }
