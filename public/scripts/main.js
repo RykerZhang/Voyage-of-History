@@ -513,7 +513,7 @@ rhit.SinglePostManager = class{
 	  }
 	update(content){
 		  this._ref.update({
-			  [rhit.KEY_TITLE]:title,
+			//   [rhit.KEY_TITLE]:title,
 			  [rhit.KEY_CONTENT]:content,
 			  [rhit.KEY_LAST_TOUCHED]:firebase.firestore.Timestamp.now()
 		  })
